@@ -48,23 +48,23 @@ O projeto foi desenvolvido para praticar:
     
     ☁️ GitHub
 
-  app_lista_tarefas_public/
-  │
-  ├── index.php
-  ├── nova_tarefa.php
-  ├── todas_tarefas.php
-  │── tarefa_controller.php
-  ├── css/
-  │   └── estilo.css
-  │
-  ├── img/
-  │   └── logo.png
-  │
-  └── app_list_tarefas/
-      ├── conexao.php
-      ├── tarefa.model.php
-      ├── tarefa.service.php
-      └── tarefa_controller.php
+    app_lista_tarefas_public/
+          │
+          ├── index.php
+          ├── nova_tarefa.php
+          ├── todas_tarefas.php
+          │── tarefa_controller.php
+          ├── css/
+          │   └── estilo.css
+          │
+          ├── img/
+          │   └── logo.png
+          │
+          └── app_list_tarefas/
+              ├── conexao.php
+              ├── tarefa.model.php
+              ├── tarefa.service.php
+              └── tarefa_controller.php
 
 📌 Conceitos Importantes Aprendidos
 
