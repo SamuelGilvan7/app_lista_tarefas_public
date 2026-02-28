@@ -15,6 +15,20 @@ class TarefaService {
         $stmt->bindValue(':tarefa',$this->Tarefa->__get('tarefa'), PDO::PARAM_STR);
         $stmt->execute();
     }
+
+    public function recuperar() {
+
+    $query = 'SELECT t.id, s.status, t.tarefa 
+              FROM tb_tarefas as t
+              LEFT JOIN tb_status as s 
+              ON (t.id_status = s.id)';
+
+    $stmt = $this->conexao->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
     public function update(){
     
     }
@@ -23,9 +37,7 @@ class TarefaService {
     
     }   
 
-    public function remove(){
 
-    }
 
 
 }    
