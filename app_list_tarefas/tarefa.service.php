@@ -29,9 +29,19 @@ class TarefaService {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
-    public function update(){
-    
-    }
+    public function atualizar() {
+
+    $query = "UPDATE tb_tarefas 
+              SET tarefa = :tarefa 
+              WHERE id = :id";
+
+    $stmt = $this->conexao->prepare($query);
+
+    $stmt->bindValue(':tarefa', $this->Tarefa->__get('tarefa'));
+    $stmt->bindValue(':id', $this->Tarefa->__get('id'));
+
+    return $stmt->execute();
+}
 
     public function delete(){
     
