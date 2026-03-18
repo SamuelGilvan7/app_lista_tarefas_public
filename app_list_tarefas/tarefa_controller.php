@@ -27,8 +27,11 @@
         $Tarefa = new Tarefa();
         $conexao = new conexao();
 
-        $Tarefa->__set('id',$_POST['id']);
-        $Tarefa->__set('tarefa',$_POST['tarefa']);
+        // Encadeamento de métodos (method chaining):
+        // O primeiro __set define o 'id' e retorna o objeto
+        // O segundo __set usa esse retorno para definir 'tarefa'
+        $Tarefa->__set('id',$_POST['id'])
+                ->__set('tarefa',$_POST['tarefa']);
         
         $TarefaService = new TarefaService($conexao,$Tarefa);
         if ($TarefaService->atualizar()){
@@ -37,6 +40,16 @@
         
         //echo $TarefaService->update();
         
+    } else if ($acao == 'remover'){
+        $Tarefa = new Tarefa();
+        $Tarefa->__set('id',$_GET['id']);
+
+        $conexao = new conexao();
+
+        $TarefaService = new TarefaService($conexao,$Tarefa);
+        $TarefaService->delete();
+
+        header('location: todas_tarefas.php');
     }
 
 

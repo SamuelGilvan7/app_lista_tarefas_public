@@ -9,7 +9,8 @@
         return $this->atributo;
     }
     public function __set($atributo,$data){
-        $this->atributo = $data;    
+        $this->atributo = $data;  
+        return $this;  
     }
 
 

@@ -30,20 +30,34 @@ class TarefaService {
 }
 
     public function atualizar() {
-
+    // Define a query SQL para atualizar uma tarefa no banco
+    // O "?" são placeholders (valores que serão substituídos depois)
     $query = "UPDATE tb_tarefas 
-              SET tarefa = :tarefa 
-              WHERE id = :id";
+            SET tarefa = ? 
+            WHERE id = ?";
 
+    // Prepara a query para execução (mais seguro contra SQL Injection)
     $stmt = $this->conexao->prepare($query);
 
-    $stmt->bindValue(':tarefa', $this->Tarefa->__get('tarefa'));
-    $stmt->bindValue(':id', $this->Tarefa->__get('id'));
+    // Substitui o primeiro "?" pelo valor da tarefa
+    // __get('tarefa') pega o valor do atributo 'tarefa' do objeto
+    $stmt->bindValue(1, $this->Tarefa->__get('tarefa'));
 
+    // Substitui o segundo "?" pelo id da tarefa
+    // __get('id') pega o valor do atributo 'id' do objeto
+    $stmt->bindValue(2, $this->Tarefa->__get('id'));
+
+    // Executa a query no banco de dados
+    // Retorna true se deu certo, ou false se deu erro
     return $stmt->execute();
 }
 
     public function delete(){
+
+    $query = 'delete from tb_tarefas where id = :id' ;
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id',$this->Tarefa->__get('id'));
+    $stmt->execute();
     
     }   
 

@@ -11,6 +11,49 @@
 	<link rel="stylesheet" href="css/estilo.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+	<script>
+		document.addEventListener("click", function(e) {
+
+			if (e.target.classList.contains("btn-editar")) {
+
+				let id = e.target.getAttribute("data-id");
+				let txt_tarefa = e.target.getAttribute("data-tarefa");
+
+				let form = document.createElement('form');
+				form.action = 'tarefa_controller.php?acao=atualizar';
+				form.method = 'post';
+				form.className = 'row';
+
+				let inputTarefa = document.createElement('input');
+				inputTarefa.type = 'text';
+				inputTarefa.name = 'tarefa';
+				inputTarefa.className = 'col-9 form-control';
+				inputTarefa.value = txt_tarefa;
+
+				let inputID = document.createElement('input');
+				inputID.type = 'hidden';
+				inputID.name = 'id';
+				inputID.value = id;
+
+				let button = document.createElement('button');
+				button.type = 'submit';
+				button.className = 'col-3 btn btn-info';
+				button.innerHTML = 'Atualizar';
+
+				form.appendChild(inputTarefa);
+				form.appendChild(inputID);
+				form.appendChild(button);
+
+				let tarefaDiv = document.getElementById('tarefa_' + id);
+				tarefaDiv.innerHTML = '';
+				tarefaDiv.appendChild(form);
+			}
+		});
+
+		function remover(id) {
+			location.href = 'tarefa_controller.php?acao=remover&id=' + id;
+		}
+	</script>
 </head>
 
 <body>
@@ -49,7 +92,7 @@
 									</div>
 
 									<div class="col-sm-3 mt-2 d-flex justify-content-between">
-										<i class="fas fa-trash-alt fa-lg text-danger"></i>
+										<i class="fas fa-trash-alt fa-lg text-danger" onclick="remover(<?=  $Tarefa-> id ?>)"></i>
 
 										<i class="fas fa-edit fa-lg text-info btn-editar"
 										   data-id="<?= (int)$Tarefa->id ?>"
@@ -67,46 +110,5 @@
 			</div>
 		</div>
 	</div>
-
-	<script>
-	document.addEventListener("click", function(e) {
-
-		if (e.target.classList.contains("btn-editar")) {
-
-			let id = e.target.getAttribute("data-id");
-			let txt_tarefa = e.target.getAttribute("data-tarefa");
-
-			let form = document.createElement('form');
-			form.action = 'tarefa_controller.php?acao=atualizar';
-			form.method = 'post';
-			form.className = 'row';
-
-			let inputTarefa = document.createElement('input');
-			inputTarefa.type = 'text';
-			inputTarefa.name = 'tarefa';
-			inputTarefa.className = 'col-9 form-control';
-			inputTarefa.value = txt_tarefa;
-
-			let inputID = document.createElement('input');
-			inputID.type = 'hidden';
-			inputID.name = 'id';
-			inputID.value = id;
-
-			let button = document.createElement('button');
-			button.type = 'submit';
-			button.className = 'col-3 btn btn-info';
-			button.innerHTML = 'Atualizar';
-
-			form.appendChild(inputTarefa);
-			form.appendChild(inputID);
-			form.appendChild(button);
-
-			let tarefaDiv = document.getElementById('tarefa_' + id);
-			tarefaDiv.innerHTML = '';
-			tarefaDiv.appendChild(form);
-		}
-	});
-	</script>
-
 </body>
 </html>
